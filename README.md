@@ -1,19 +1,34 @@
 # Ansible 101
 [Return to Main Page](https://github.com/lucas-benedito/training)
-Repository containing Training data
 
 How to install Ansible
 ```
 $ dnf install ansible-core
 ```
+Verify the installation
+```
+$ ansible --version
+```
 
 Create your inventory
 ```
 $ vi inventory
-node1 ansible_user=devops
+[labnodes]
+node1 ansible_user=root
+```
+
+Check your inventory with the ansible-inventory command
+```
+$ ansible-inventory -i inventory --list
 ```
 
 Execute an ansible ping
 ```
-$ ansible all -i inventory -m ping
+$ ansible all -i inventory -m ping --ask-pass
+```
+
+Executing commands to a specific group/node
+```
+$ ansible labnodes -i inventory -m ping --ask-pass
+$ ansible node1 -i inventory -m ping --ask-pass
 ```
